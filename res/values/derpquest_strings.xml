@@ -790,4 +790,8 @@
     <string name="ticker_animation_mode_scroll">Scroll</string>
     <string name="ticker_tick_duration_title">Ticker duration</string>
 
+    <!-- Show Status Area -->
+    <string name="clock_show_status_area_title">Typographic Clock Status Area</string>
+    <string name="clock_show_status_area_summary">Display date and weather information with the Typographic Clock</string>
+
 </resources>

@@ -43,6 +43,12 @@
         android:summary="@string/hide_lockicon_summary"
         android:defaultValue="false" />
 
+    <com.derpquest.settings.preferences.SystemSettingSwitchPreference
+        android:key="clock_show_status_area"
+        android:title="@string/clock_show_status_area_title"
+        android:summary="@string/clock_show_status_area_summary"
+        android:defaultValue="true" />
+
     <com.derpquest.settings.preferences.SecureSettingSwitchPreference
         android:key="sysui_keyguard_show_battery_bar"
         android:title="@string/tuner_keyguard_show_battery_bar_title"
