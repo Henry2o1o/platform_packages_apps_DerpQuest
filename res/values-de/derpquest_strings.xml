@@ -108,7 +108,7 @@
     <string name="action_value_voice_search" translatable="false">task_voice_search</string>
     <string name="action_value_menu" translatable="false">task_menu</string>
     <string name="picker_activities">Aktivitäten</string>
-    <string name="select_custom_app_title">Eine benutzerdefinierte App ausählen</string>
+    <string name="select_custom_app_title">Eine benutzerdefinierte App auswählen</string>
     <string name="select_custom_activity_title">Eine benutzerdefinierte Aktivität auswählen</string>
     <string name="profile_applist_title">Apps</string>
     <string name="choose_action_title">Wähle eine Aktion</string>
