@@ -135,7 +135,7 @@
 
     <!-- Volume rocker music control -->
     <string name="volume_rocker_music_controls_title">Wiedergabesteuerung</string>
-    <string name="volume_rocker_music_controls_summary">Wenn der Bildschirm ausgeschaltet ist, kann durch langes Drücken der Lautstärketasten nach Musiktiteln gestucht werden</string>
+    <string name="volume_rocker_music_controls_summary">Wenn der Bildschirm ausgeschaltet ist, kann durch langes Drücken der Lautstärketasten nach Musiktiteln gesucht werden</string>
 
     <!-- Volume rocker wake -->
     <string name="volume_rocker_wake_title">Volume rocker wake</string>
