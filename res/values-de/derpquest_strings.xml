@@ -164,7 +164,7 @@
     <string name="wakeup_when_plugged_unplugged_summary">Gerät aufwecken, wenn das Ladegerät angeschlossen/ausgesteckt ist.</string>
 
     <!-- Battery light -->
-    <string name="battery_light_settings">Akkuanzeige</string>
+    <string name="battery_light_settings">Akkuladeanzeige</string>
     <string name="battery_light_enable">Aktivieren</string>
     <string name="battery_light_allow_on_dnd_title">Akkuanzeige im Nicht stören-Modus</string>
     <string name="battery_light_low_blinking_title">Blinklicht bei schwachem Akku</string>
