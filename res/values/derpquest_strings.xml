@@ -610,6 +610,7 @@
     <string name="pulse_ambient_auto_color_summary">Sets edge light color to the primary color of wallpaper</string>
     <string name="pulse_ambient_light_duration_title">Duration</string>
     <string name="pulse_ambient_light_duration_summary">Sets the ambient light animation duration</string>
+    <string name="applied_changes_edgelight">For Edge lighting to work, AOD was automatically deactivated and ambient wake gestures activated.</string>
 
     <!-- QuickSettings Panel Transparency -->
     <string name="qs_panel_alpha_title">Quick Settings opacity</string>
