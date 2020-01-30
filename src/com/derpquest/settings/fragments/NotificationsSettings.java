@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 The PixelDust Project
+ * Copyright (C) 2017-2020 The PixelDust Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,26 @@
  */
 package com.derpquest.settings.fragments;
 
+import android.content.Context;
+import android.content.ContentResolver;
+import android.os.UserHandle;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.widget.Toast;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
 import com.derpquest.settings.Utils;
 
 import com.derpquest.settings.preferences.AmbientLightSettingsPreview;
@@ -39,14 +49,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NotificationsSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+@SearchIndexable
+public class NotificationsSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener, Indexable {
 
     private static final String INCALL_VIB_OPTIONS = "incall_vib_options";
     private static final String FLASH_ON_CALL_WAITING_DELAY = "flash_on_call_waiting_delay";
     private static final String FLASH_ON_CALL_CATEGORY = "flash_on_call_category";
+    private static final String PULSE_AMBIENT_LIGHT = "pulse_ambient_light";
     private static final String PULSE_AMBIENT_LIGHT_COLOR = "pulse_ambient_light_color";
     private static final String PULSE_AMBIENT_LIGHT_DURATION = "pulse_ambient_light_duration";
 
+    private SwitchPreference mEdgeLightPreference;
     private ColorPickerPreference mEdgeLightColorPreference;
     private SystemSettingSeekBarPreference mEdgeLightDurationPreference;
     private Preference mChargingLeds;
@@ -81,6 +94,12 @@ public class NotificationsSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(mChargingLeds);
         }
 
+        mEdgeLightPreference = (SwitchPreference) findPreference(PULSE_AMBIENT_LIGHT);
+        boolean mEdgeLightOn = Settings.System.getInt(getContentResolver(),
+                Settings.System.PULSE_AMBIENT_LIGHT, 0) == 1;
+        mEdgeLightPreference.setChecked(mEdgeLightOn);
+        mEdgeLightPreference.setOnPreferenceChangeListener(this);
+
         mEdgeLightColorPreference = (ColorPickerPreference) findPreference(PULSE_AMBIENT_LIGHT_COLOR);
         mEdgeLightColorPreference.setOnPreferenceChangeListener(this);
         int edgeLightColor = Settings.System.getInt(getContentResolver(),
@@ -99,25 +118,26 @@ public class NotificationsSettings extends SettingsPreferenceFragment implements
         int duration = Settings.System.getInt(getContentResolver(),
                 Settings.System.PULSE_AMBIENT_LIGHT_DURATION, 2);
         mEdgeLightDurationPreference.setValue(duration);
-
-        if (!getResources().getBoolean(
-                        com.android.internal.R.bool.config_supportAmbientWakeGestures)) {
-            PreferenceCategory mEdgeCat = (PreferenceCategory) findPreference("notification_screen");
-            SystemSettingSwitchPreference mEdgeAutoLightPreference = (SystemSettingSwitchPreference) findPreference("pulse_ambient_light");
-            SystemSettingSwitchPreference mEdgeAutoColorPreference = (SystemSettingSwitchPreference) findPreference("pulse_ambient_auto_color");
-            prefScreen.removePreference(mEdgeAutoLightPreference);
-            prefScreen.removePreference(mEdgeLightDurationPreference);
-            prefScreen.removePreference(mEdgeAutoColorPreference);
-            prefScreen.removePreference(mEdgeLightColorPreference);
-            prefScreen.removePreference(mEdgeCat);
-        }
     }
 
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+
         if (preference == mFlashOnCallWaitingDelay) {
             int val = (Integer) newValue;
             Settings.System.putInt(getContentResolver(), Settings.System.FLASH_ON_CALLWAITING_DELAY, val);
+            return true;
+        } else if (preference == mEdgeLightPreference) {
+            boolean isOn = (Boolean) newValue;
+            Settings.System.putInt(resolver,
+                    Settings.System.PULSE_AMBIENT_LIGHT, isOn ? 1 : 0);
+            // if edge light is enabled, switch off AOD and switch on Ambient wake gestures
+            if (isOn) {
+                Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 0);
+                Settings.System.putInt(resolver, Settings.System.AMBIENT_WAKE_GESTURES, 1);
+                Toast.makeText(getContext(), R.string.applied_changes_edgelight,
+                        Toast.LENGTH_LONG).show();
+            }
             return true;
         } else if (preference == mEdgeLightColorPreference) {
             String hex = ColorPickerPreference.convertToRGB(
@@ -146,4 +166,25 @@ public class NotificationsSettings extends SettingsPreferenceFragment implements
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.OWLSNEST;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                                                                            boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.derpquest_settings_notifications;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    return keys;
+                }
+            };
 }
