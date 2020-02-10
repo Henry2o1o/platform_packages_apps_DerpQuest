@@ -273,25 +273,8 @@
     <!-- Lock Clock Fonts -->
     <string name="lock_clock_font_title">Schriftstil der Uhr</string>
     <string name="lock_clock_font_summary">Standardschriftart des Sperrbildschirm-Uhr-Widgets ändern</string>
-    <string name="lock_clock_font_dialog_title">Select lock clock font</string>
-    <string name="lock_clock_font_stock">Normal</string>
-    <string name="lock_clock_font_bold">Fett</string>
-    <string name="lock_clock_font_italic">Kursiv</string>
-    <string name="lock_clock_font_bold_italic">Fett kursiv</string>
-    <string name="lock_clock_font_light_italic">Schmal kursiv</string>
-    <string name="lock_clock_font_thin_italic">Ultraleicht kursiv</string>
-    <string name="lock_clock_font_light">Leicht</string>
-    <string name="lock_clock_font_thin">Dünn</string>
-    <string name="lock_clock_font_condensed_normal">Schmal</string>
-    <string name="lock_clock_font_condensed_italic">Schmal &amp; Kursiv</string>
-    <string name="lock_clock_font_condensed_bold">Schmal &amp; Fett</string>
-    <string name="lock_clock_font_condensed_bold_italic">Schmal, Fett und kursiv</string>
-    <string name="lock_clock_font_condensed_light">Leicht Schmal</string>
-    <string name="lock_clock_font_condensed_light_italic">Leicht Schmal + kursiv</string>
-    <string name="lock_clock_font_medium_normal">Mittel</string>
-    <string name="lock_clock_font_medium_italic">Medium kursiv</string>
-    <string name="lock_clock_font_black">Schwarz</string>
-    <string name="lock_clock_font_black_italic">Schwarz kursiv</string>
+    <string name="lock_clock_font_dialog_title">Schriftart der Sperrbildschirm-Uhr auswählen</string>
+    <string name="lock_clock_font_stock">Normal (Standard)</string>
 
     <!-- Media art -->
     <string name="lockscreen_media_category">Musik</string>
