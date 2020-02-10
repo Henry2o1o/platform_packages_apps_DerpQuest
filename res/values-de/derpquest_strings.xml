@@ -33,7 +33,7 @@
     <string name="theming_title">Design</string>
     <string name="animations_title">Animationen</string>
     <string name="nav_bar_category_title">Navigationsleiste</string>
-    <string name="edge_lighting_category_title">Randbeleuchtung</string>
+    <string name="edge_lighting_category_title">Edge Lighting</string>
 
     <!-- General strings -->
     <string name="ok">OK</string>
@@ -146,7 +146,7 @@
 
     <!-- Wakeup options -->
     <string name="wakeup_when_plugged_unplugged_title">Aufwecken beim Laden</string>
-    <string name="wakeup_when_plugged_unplugged_summary">Aufwechen des Gerätes, wenn Ladegerät angeschlossen/abgezogen wird.</string>
+    <string name="wakeup_when_plugged_unplugged_summary">Aufwecken des Gerätes, wenn Ladegerät angeschlossen/abgezogen wird.</string>
 
     <!-- Battery light -->
     <string name="battery_light_enable">Aktiviert</string>
@@ -453,7 +453,7 @@
     <string name="incall_vibration_category">Vibration bei eingehendem Anruf</string>
     <string name="incall_vibrate_connect_title">Vibriert bei Verbindung</string>
     <string name="incall_vibrate_call_wait_title">Vibriert beim Anklopfen von Anrufen</string>
-    <string name="incall_vibrate_call_wait_title">Vibrieren bei Anklopfen</string>
+    <string name="incall_vibrate_call_wait_title">Vibrieren beim Anklopfen</string>
     <string name="incall_vibrate_call_wait_summary">Vibration aktivieren, wenn der Anruf im Wartezustand ist</string>
     <string name="incall_vibrate_disconnect_title">Vibriert beim Trennen der Verbindung</string>
     <string name="incall_notifications_vibrate">Vibration bei Benachrichtigungen</string>
